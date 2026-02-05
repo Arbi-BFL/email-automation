@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   email-automation:
+    env_file:
+      - .env
     image: arbi-email-automation:latest
     container_name: arbi-email-automation
     ports:

@@ -45,6 +45,7 @@ jobs:
           docker load < arbi-email-automation.tar.gz
           cd /root/deployments/email-automation
           cp /tmp/email-automation-deploy/docker-compose.prod.yml ./docker-compose.yml
+          echo "DISCORD_WEBHOOK=${{ secrets.DISCORD_WEBHOOK }}" > .env
           docker compose down || true
           docker compose up -d
           rm -rf /tmp/email-automation-deploy
