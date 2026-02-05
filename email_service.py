@@ -71,6 +71,12 @@ CATEGORIES = {
         'priority': 4,
         'notify_discord': False,
         'auto_response': None
+    },
+    'general': {
+        'keywords': [],
+        'priority': 5,
+        'notify_discord': True,
+        'auto_response': None
     }
 }
 
