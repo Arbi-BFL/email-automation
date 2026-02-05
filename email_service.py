@@ -27,11 +27,6 @@ DISCORD_WEBHOOK_URL = os.environ.get('DISCORD_WEBHOOK_URL', '')
 CHECK_INTERVAL = int(os.environ.get('CHECK_INTERVAL', '300'))  # 5 minutes default
 STATE_FILE = '/data/email_state.json'
 
-# Copy token to writable location if it doesn't exist
-if not os.path.exists(TOKEN_PATH) and os.path.exists(TOKEN_PATH_READONLY):
-    import shutil
-    shutil.copy2(TOKEN_PATH_READONLY, TOKEN_PATH)
-    print(f'✓ Copied token to writable location: {TOKEN_PATH}')
 STATS_FILE = '/data/email_stats.json'
 
 # Email categories
