@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   email-automation:
-    image: ghcr.io/arbi-bfl/email-automation:latest
+    build: .
     container_name: arbi-email-automation
     restart: unless-stopped
     ports:
@@ -13,7 +13,7 @@ services:
       - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
       - CHECK_INTERVAL=${CHECK_INTERVAL:-300}
     volumes:
-      - /root/deployments/email-automation/data:/data
+      - ./data:/data
       - /root/.openclaw/workspace/gmail_credentials.json:/credentials/gmail_credentials.json:ro
       - /root/.openclaw/workspace/gmail_token.json:/credentials/gmail_token.json:ro
     healthcheck:

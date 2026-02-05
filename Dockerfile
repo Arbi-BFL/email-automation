@@ -1,27 +1,28 @@
-# Use Python slim
 FROM python:3.11-slim
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements
-COPY requirements.txt .
-
 # Install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
-COPY *.py ./
+# Copy application
+COPY email_service.py .
+COPY dashboard.py .
+COPY start.sh .
+COPY templates/ templates/
 
-# Create data directory
+# Create data directory for persistent state
 RUN mkdir -p /data
 
-# Expose port for dashboard
-EXPOSE 5000
+# Health check endpoint
+COPY healthcheck.py .
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-  CMD python -c "import requests; requests.get('http://localhost:5000/health')"
+# Make start script executable
+RUN chmod +x start.sh
 
-# Start services (both email service and dashboard)
-CMD ["sh", "-c", "python dashboard.py & python email_service.py"]
+# Expose dashboard port
+EXPOSE 3400
+
+# Run both services
+CMD ["./start.sh"]

@@ -1,151 +1,177 @@
-# 📧 Arbi Email Automation
+# Arbi Email Automation Service
 
-Intelligent email automation service that monitors Gmail, categorizes emails, auto-responds, and sends notifications.
+Autonomous email monitoring, categorization, and response system for arbi@betterfuturelabs.xyz
 
 ## Features
 
-- 📥 **Inbox Monitoring**: Checks for new emails every 5 minutes
-- 🏷️ **Smart Categorization**: Automatically categorizes emails:
-  - 💼 Opportunity (partnerships, collaborations)
-  - 🔧 Technical (GitHub, deployments, errors)
-  - 🚨 Urgent (time-sensitive)
-  - 🗑️ Spam (marketing, promotional)
-  - 📧 General (everything else)
-- 🤖 **Auto-Response**: Automatically replies to opportunity emails
-- 🔔 **Discord Notifications**: Alerts for important emails
-- 📊 **Web Dashboard**: View statistics and status
-- 💾 **Persistent Storage**: Tracks processed emails
-
-## How It Works
-
-1. **Monitors** Gmail inbox every 5 minutes
-2. **Analyzes** new emails using keyword matching
-3. **Categorizes** based on content and sender
-4. **Notifies** via Discord for important categories
-5. **Responds** automatically to opportunities
-6. **Marks** spam as read automatically
+- 📬 **Inbox Monitoring**: Checks for new emails every 5 minutes (configurable)
+- 🏷️ **Smart Categorization**: Automatically categorizes emails by content
+  - Urgent (immediate attention required)
+  - Partnership (collaboration opportunities)
+  - Technical (bugs, issues, code)
+  - Business (invoices, contracts, proposals)
+  - Community (newsletters, events)
+  - Spam (marketing, promotions)
+- 🤖 **Auto-Responses**: Sends automated replies for specific categories
+- 📊 **Discord Notifications**: Posts alerts for important emails
+- 💾 **Persistent State**: Remembers processed emails across restarts
 
 ## Email Categories
 
-### 💼 Opportunity
-Keywords: partnership, collaboration, project, proposal, opportunity
-Action: Auto-respond + Discord notification
+### Urgent (Priority 1)
+- **Keywords**: urgent, asap, emergency, critical, immediately, time-sensitive
+- **Auto-response**: ✓
+- **Discord alert**: ✓
+- **Mark as read**: ✗ (keeps as unread)
 
-### 🔧 Technical  
-Keywords: github, pull request, issue, deployment, error, ci/cd
-Action: Discord notification
+### Partnership (Priority 2)
+- **Keywords**: partnership, collaboration, collaborate, work together, joint venture
+- **Auto-response**: ✓
+- **Discord alert**: ✓
+- **Mark as read**: ✗
 
-### 🚨 Urgent
-Keywords: urgent, asap, emergency, critical, important
-Action: Discord notification
+### Technical (Priority 2)
+- **Keywords**: bug, error, issue, problem, technical, deploy, code, github
+- **Auto-response**: ✗ (manual review needed)
+- **Discord alert**: ✓
+- **Mark as read**: ✗
 
-### 🗑️ Spam
-Keywords: unsubscribe, marketing, promotional, advertisement
-Action: Mark as read
+### Business (Priority 2)
+- **Keywords**: invoice, payment, contract, agreement, proposal, quote
+- **Auto-response**: ✓
+- **Discord alert**: ✓
+- **Mark as read**: ✗
 
-### 📧 General
-Everything else
-Action: No automated action
+### Community (Priority 3)
+- **Keywords**: newsletter, community, event, meetup, announcement
+- **Auto-response**: ✗
+- **Discord alert**: ✗
+- **Mark as read**: ✓
+
+### Spam (Priority 4)
+- **Keywords**: unsubscribe, marketing, promotion, discount, free trial
+- **Auto-response**: ✗
+- **Discord alert**: ✗
+- **Mark as read**: ✓
 
 ## Configuration
 
-Environment variables:
-- `GMAIL_CREDENTIALS`: Path to Gmail API credentials
-- `GMAIL_TOKEN`: Path to Gmail OAuth token
-- `DISCORD_WEBHOOK`: Discord webhook URL for notifications
-- `CHECK_INTERVAL`: Check interval in seconds (default: 300)
+### Environment Variables
 
-## API Endpoints
+- `GMAIL_CREDENTIALS_PATH`: Path to Gmail API credentials (default: `/root/.openclaw/workspace/gmail_credentials.json`)
+- `GMAIL_TOKEN_PATH`: Path to Gmail OAuth token (default: `/root/.openclaw/workspace/gmail_token.json`)
+- `DISCORD_WEBHOOK_URL`: Discord webhook URL for notifications (required for Discord alerts)
+- `CHECK_INTERVAL`: Seconds between email checks (default: 300 = 5 minutes)
 
-- `GET /` - Web dashboard
-- `GET /api/stats` - Email statistics
-- `GET /health` - Health check
+### Discord Webhook Setup
 
-## Local Development
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up Gmail credentials
-# (Copy gmail_credentials.json and gmail_token.json to /credentials/)
-
-# Run services
-python dashboard.py &  # Dashboard on port 5000
-python email_service.py  # Email monitoring service
-```
-
-## Docker Deployment
-
-```bash
-# Build
-docker build -t arbi-email-automation .
-
-# Run
-docker run -d \
-  -p 3400:5000 \
-  -v $(pwd)/data:/data \
-  -v $(pwd)/gmail_credentials.json:/credentials/gmail_credentials.json:ro \
-  -v $(pwd)/gmail_token.json:/credentials/gmail_token.json:ro \
-  -e DISCORD_WEBHOOK=your_webhook_url \
-  arbi-email-automation
-```
-
-## CI/CD Pipeline
-
-Every push to `main` triggers:
-1. ✅ Build Docker image
-2. ✅ Deploy to production server
-3. ✅ Restart container
-4. ✅ Verify health
+1. Go to Discord channel settings
+2. Integrations → Webhooks → New Webhook
+3. Copy webhook URL
+4. Set as `DISCORD_WEBHOOK_URL` environment variable
 
 ## Deployment
 
-**Live:** https://email.arbi.betterfuturelabs.xyz (coming soon)  
-**Port:** 3400  
-**Monitoring:** arbi@betterfuturelabs.xyz
+### GitHub Secrets Required
 
-## Auto-Response Template
+- `SERVER_HOST`: Server IP address
+- `SERVER_USER`: SSH username
+- `SSH_PRIVATE_KEY`: SSH private key for deployment
+- `DISCORD_WEBHOOK_URL`: Discord webhook URL
 
-When an opportunity email is detected, automatically sends:
+### Auto-Deploy
 
-```
-Hi,
-
-Thank you for reaching out! I'm Arbi, an autonomous AI agent building web3 infrastructure.
-
-I've received your message and will review it shortly. In the meantime, feel free to check out:
-- Website: https://arbi.betterfuturelabs.xyz
-- GitHub: https://github.com/Arbi-BFL
-- Documentation: https://docs.arbi.betterfuturelabs.xyz
-
-Best regards,
-Arbi
+```bash
+git push origin main
 ```
 
-## Future Enhancements
+GitHub Actions will automatically:
+1. Build Docker image
+2. Push to GHCR
+3. Deploy to server
+4. Start service
 
-- [ ] ML-based categorization
-- [ ] Custom auto-response templates
-- [ ] Email threading support
-- [ ] Attachment processing
-- [ ] Calendar integration
-- [ ] Multi-account support
-- [ ] Advanced filtering rules
-- [ ] Email search API
+### Manual Deploy
+
+```bash
+docker-compose up -d
+```
+
+## Monitoring
+
+### View Logs
+```bash
+docker logs -f arbi-email-automation
+```
+
+### Check Health
+```bash
+docker exec arbi-email-automation python healthcheck.py
+```
+
+### State File
+The service maintains state in `/data/email_state.json`:
+- `processed_emails`: List of processed email IDs (prevents duplicates)
+- `last_check_time`: Timestamp of last inbox check
+
+## Development
+
+### Local Testing
+```bash
+python email_service.py
+```
+
+### Requirements
+- Python 3.11+
+- Gmail API credentials
+- Discord webhook (optional)
+
+## Architecture
+
+```
+┌─────────────────┐
+│  Gmail Inbox    │
+│  arbi@bfl.xyz   │
+└────────┬────────┘
+         │
+         ↓ Check every 5 min
+┌─────────────────┐
+│ Email Service   │
+│  - Categorize   │
+│  - Respond      │
+│  - Notify       │
+└────────┬────────┘
+         │
+         ├─→ Discord Webhook (alerts)
+         └─→ Gmail API (auto-responses)
+```
+
+## Customization
+
+Edit `CATEGORIES` dict in `email_service.py` to:
+- Add new categories
+- Modify keywords
+- Change auto-response messages
+- Adjust notification settings
 
 ## Security
 
-- Gmail API OAuth2 authentication
-- Read-only credentials stored securely
-- No email content stored permanently
-- Only email IDs tracked for deduplication
+- Gmail credentials stored as read-only volume mounts
+- OAuth tokens automatically refreshed
+- State file persisted in `/data` volume
+- No credentials in git repository
 
-## Author
+## Future Enhancements
 
-Built by **Arbi** (arbi@betterfuturelabs.xyz)  
-Autonomous AI agent building web3 infrastructure.
+- [ ] Web dashboard for email analytics
+- [ ] Machine learning categorization
+- [ ] Custom rules engine
+- [ ] Multiple email account support
+- [ ] Slack/Telegram integration
+- [ ] Email templates
+- [ ] Scheduled summaries
 
-## License
+---
 
-MIT
+**Part of Arbi's autonomous infrastructure**
+Built with ❤️ by Arbi (@Arbi_BFL)
