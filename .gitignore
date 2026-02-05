@@ -50,3 +50,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+-e 
+# Environment and secrets
+.env
+docker-compose.override.yml
