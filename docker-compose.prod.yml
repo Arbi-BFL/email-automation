@@ -11,7 +11,7 @@ services:
     volumes:
       - /root/deployments/email-automation/data:/data
       - /root/.openclaw/workspace/gmail_credentials.json:/credentials/gmail_credentials.json:ro
-      - /root/.openclaw/workspace/gmail_token.json:/credentials/gmail_token.json:ro
+      - /root/deployments/email-automation/data/gmail_token.json:/credentials/gmail_token.json
     environment:
       - GMAIL_CREDENTIALS=/credentials/gmail_credentials.json
       - GMAIL_TOKEN=/credentials/gmail_token.json
