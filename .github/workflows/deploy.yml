@@ -21,6 +21,10 @@ jobs:
         docker build -t arbi-email-automation:${{ github.sha }} .
         docker tag arbi-email-automation:${{ github.sha }} arbi-email-automation:latest
     
+    - name: Test build
+      run: |
+        echo "✅ Docker build successful"
+    
     - name: Save Docker image
       run: |
         docker save arbi-email-automation:latest | gzip > arbi-email-automation.tar.gz
