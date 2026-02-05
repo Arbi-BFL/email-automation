@@ -99,6 +99,7 @@ class EmailAutomationService:
             os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
             with open(STATE_FILE, 'w') as f:
                 json.dump(self.state, f, indent=2)
+            print(f"✓ State saved: {len(self.state.get('processed_emails', []))} processed emails")
         except Exception as e:
             print(f"Error saving state: {e}")
     
@@ -312,7 +313,7 @@ class EmailAutomationService:
                 embed.add_field(name="Subject", value=email['subject'], inline=False)
                 embed.add_field(name="Category", value=category.upper(), inline=True)
                 
-                await webhook.send(embed=embed, username="Arbi Email Monitor")
+                await webhook.send(content="<@1468335112679723048>", embed=embed, username="Arbi Email Monitor")
                 
                 print(f"✓ Notified Discord about {category} email")
                 
