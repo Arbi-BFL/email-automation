@@ -4,12 +4,14 @@ Email Dashboard - Web interface for email automation stats
 """
 
 from flask import Flask, render_template, jsonify
+from flask_cors import CORS
 import json
 import os
 from datetime import datetime, timedelta
 from collections import Counter
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 STATE_FILE = '/data/email_state.json'
 STATS_FILE = '/data/email_stats.json'
