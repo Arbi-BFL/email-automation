@@ -24,268 +24,98 @@
             color: #fff;
         }
         
-        /* Navigation */
-        .nav {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: #fff;
-            background: var(--card-bg);
-        }
-        
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            opacity: 0.9;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Status Badge */
-        .status {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-        
-        .status.healthy {
-            background: rgba(16, 185, 129, 0.3);
-            border: 1px solid rgba(16, 185, 129, 0.5);
-        }
-        
-        .status.stale {
-            background: rgba(245, 158, 11, 0.3);
-            border: 1px solid rgba(245, 158, 11, 0.5);
-        }
-        
-        .status.starting {
-            background: rgba(59, 130, 246, 0.3);
-            border: 1px solid rgba(59, 130, 246, 0.5);
-        }
-        
-        .last-check {
-            margin-top: 0.5rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-        
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .stat-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-        }
-        
-        .stat-card h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.5px;
-        }
-        
-        .stat-card .value {
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-        
-        .stat-card.urgent .value { color: #ef4444; }
-        .stat-card.partnership .value { color: #10b981; }
-        .stat-card.technical .value { color: #3b82f6; }
-        
-        /* Categories */
-        .categories, .recent-emails {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            padding: 2rem;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .categories h2, .recent-emails h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .category-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            border-left: 4px solid;
-        }
-        
-        .category-item.urgent { border-left-color: #ef4444; }
-        .category-item.partnership { border-left-color: #10b981; }
-        .category-item.technical { border-left-color: #3b82f6; }
-        .category-item.business { border-left-color: #f59e0b; }
-        .category-item.community { border-left-color: #8b5cf6; }
-        .category-item.spam { border-left-color: #6b7280; }
-        .category-item.general { border-left-color: #fff; }
-        
-        .category-name {
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        .category-count {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        /* Email Items */
-        .email-item {
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            border-left: 4px solid #fff;
-        }
-        
-        .email-subject {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-        
-        .email-from {
-            opacity: 0.8;
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .email-category {
-            display: inline-block;
-            padding: 0.35rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            opacity: 0.7;
-            font-size: 1.1rem;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-        
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        .refresh-note {
-            text-align: center;
-            opacity: 0.6;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-        }
-        
+        /* Unified Navbar Styles */
+.navbar {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+.services-nav {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-link {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.service-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.service-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.service-icon {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .navbar-top {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+    
+    .services-nav {
+        gap: 0.5rem;
+    }
+    
+    .service-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
@@ -295,18 +125,40 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="https://arbi.betterfuturelabs.xyz" class="nav-brand">🤖 Arbi</a>
-            <div class="nav-links">
-                <a href="https://wallet.arbi.betterfuturelabs.xyz" class="nav-link">💰 Wallet</a>
-                <a href="https://email.arbi.betterfuturelabs.xyz" class="nav-link active">📧 Email</a>
-                <a href="https://analytics.arbi.betterfuturelabs.xyz" class="nav-link">📊 Analytics</a>
-                <a href="https://docs.arbi.betterfuturelabs.xyz" class="nav-link">📚 Docs</a>
+    <!-- Unified Navbar - Copy this to all pages -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-top">
+            <div class="brand">
+                🤖 Arbi
+                <span class="brand-subtitle">Better Future Labs</span>
             </div>
         </div>
-    </nav>
+        <div class="services-nav">
+            <a href="https://arbi.betterfuturelabs.xyz" class="service-link">
+                <span class="service-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="https://wallet.arbi.betterfuturelabs.xyz" class="service-link">
+                <span class="service-icon">💰</span>
+                <span>Wallet</span>
+            </a>
+            <a href="https://email.arbi.betterfuturelabs.xyz" class="service-link active">
+                <span class="service-icon">📧</span>
+                <span>Email</span>
+            </a>
+            <a href="https://analytics.arbi.betterfuturelabs.xyz" class="service-link">
+                <span class="service-icon">📊</span>
+                <span>Analytics</span>
+            </a>
+            <a href="https://docs.arbi.betterfuturelabs.xyz" class="service-link">
+                <span class="service-icon">📚</span>
+                <span>Docs</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
     
     <!-- Main Content -->
     <div class="container">
